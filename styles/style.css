@@ -1,0 +1,13 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+.nav-wrapper {
+  background-color: #44355B
+}
+.ui grid {
+  background-image: url(/Users/yeshewingerd/Galvanize/reddit-clone/styles/black_thread/black_thread_@2X.png);
+  background-size: repeat;
+  width: 100%;
+  height: 100%;
+}

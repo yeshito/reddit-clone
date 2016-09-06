@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html ng-app="redditClone">
+<head>
+  <title>Reddit Clone</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/style.css">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  <script src="app.js"></script>
+</head>
+<body ng-controller="RedditController">
+  <ul id="dropdown1" class="dropdown-content">
+    <li><a href="#!">Votes</a></li>
+    <li><a href="#!">Date Posted</a></li>
+    <li><a href="#!">Title</a></li>
+  </ul>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center">Reddit Clone</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="" ng-click="reddit.showPostForm=!reddit.showPostForm">Add a Post<i class="medium material-icons left">note_add</i></a></li>
+        <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Sort By<i class="material-icons right">arrow_drop_down</i></a></li>
+      </ul>
+      <form>
+        <div class="input-field left">
+          <input id="search" type="search" required>
+          <label for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+    </div>
+  </nav>
+  <div class="container fluid">
+    <div class="row" ng-show="reddit.showPostForm">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <input ng-model="reddit.title" id="title" type="text" class="validate" required>
+            <label for="title">Post Title</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input ng-model="reddit.author"id="Postauthor" type="text" class="validate" required>
+            <label for="Postauthor">Post Author</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input ng-model="reddit.imageURL" id="imageURL" type="url" class="validate" required>
+            <label for="imageURL">Image URL</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s10">
+            <textarea ng-model="reddit.description" id="textarea1" class="materialize-textarea" required></textarea>
+            <label for="textarea1">Post Description</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s3">
+            <a class="waves-effect waves-light btn" ng-click="reddit.showPostForm=!reddit.showPostForm; reddit.addPost()">Add New Post</a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div ng-repeat="post in reddit.posts">
+      <div post-card>
+        <h1>{{post.title}}</h1>
+      </div>
+    </div>
+    <!-- <div class="row">
+      <div class="col l12">
+        <div class="card horizontal hoverable">
+          <div class="card-image">
+            <img src="https://guitarexperienceradioshow.files.wordpress.com/2016/08/manolo-sanlucar.jpg">
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+              <div class="row">
+                <div class="col l8">
+                  <h5>Manolo Sanlucar is Zeus</h5>
+                  <h6>by Yeshe Wingerd</h6>
+                </div>
+                <div class="col l3">
+                  <a href="#"><i class="small material-icons">thumb_up</i></a>
+                  <a href="#"><i class="small material-icons">thumb_down</i></a>
+                </div>
+                <div class="col l1">
+                  <h5 >12</h5>
+                </div>
+              </div>
+              <p>I am a very simple card. I am good at containing small bits of information.</p>
+            </div>
+            <div class="card-action">
+              <div class="row">
+                <div class="col l6">
+                  <p>posted yesterday at 5am</p>
+                </div>
+                <div class="col l3">
+                  <a href="#" class="activator"><i class="material-icons">chat_bubble_outline</i>1 comment</a>
+                </div>
+                <div class="col l3">
+                  <a href="#" class="activator"><i class="material-icons">mode_edit</i>Add Comment</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-reveal">
+            <div class="row showComments">
+              <span class="card-title grey-text text-darken-4">Comment<i class="material-icons right">close</i></span>
+              <p>Johnny: Why is this guy so amazing!?</p>
+              <p>Samantha: Well he works the shit out of shit, and has devoted himself fully. What an expressive player...</p>
+            </div> -->
+            <!-- <div class="addComments">
+              <form>
+                <div class="input-field row">
+                  <div class="col l5">
+                    <input id="commentAuthor" type="text" class="validate">
+                    <label for="commentAuthor">Author</label>
+                  </div>
+                </div>
+                <div class="input-field row">
+                  <div class="col l7">
+                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <label for="textarea1">Comment</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <a class="waves-effect waves-light btn">Add Comment</a>
+                </div>
+              </form>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<ng-template>
+</ng-template>
+</html>
