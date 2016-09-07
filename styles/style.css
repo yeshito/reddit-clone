@@ -11,3 +11,9 @@ html, body {
   width: 100%;
   height: 100%;
 }
+.color-red {
+  color: #AD343E;
+}
+.color-green {
+  color: #16DB93
+}

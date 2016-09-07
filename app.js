@@ -2,7 +2,9 @@
 
 const app = angular.module('redditClone', []);
 
-app.controller('RedditController', $scope => {
+app.router('/',)
+
+app.controller('RedditController', function ($scope) {
   $scope.reddit = {};
   $scope.reddit.posts = [];
   $scope.reddit.showpostForm = false;
@@ -15,7 +17,12 @@ app.controller('RedditController', $scope => {
     this.date = new Date();
     this.comments = [];
     this.votes = 0;
-    this.
+    this.voteUp = function () {
+      this.votes++;
+    }
+    this.voteDown = function () {
+      this.votes--;
+    }
   };
 
   $scope.reddit.addPost = function () {
@@ -27,7 +34,6 @@ app.controller('RedditController', $scope => {
 app.directive('postCard', function () {
     return {
         template: templateString
-        // restrict: 'E'
     };
 })
 
@@ -45,25 +51,25 @@ const templateString = `<div class="row">
               <h6>by {{post.author}}</h6>
             </div>
             <div class="col l3">
-              <a href="#"><i class="small material-icons">thumb_up</i></a>
-              <a href="#"><i class="small material-icons">thumb_down</i></a>
+              <a ng-click="post.voteUp()" href=""><i class="small material-icons">thumb_up</i></a>
+              <a ng-click="post.voteDown()" href=""><i class="small material-icons">thumb_down</i></a>
             </div>
             <div class="col l1">
-              <h5>{{post.}}</h5>
+              <h5 ng-class="{'color-green': post.votes > 0, 'color-red': post.votes < 0}">{{post.votes}}</h5>
             </div>
           </div>
-          <p>I am a very simple card. I am good at containing small bits of information.</p>
+          <p>{{post.description}}</p>
         </div>
         <div class="card-action">
           <div class="row">
             <div class="col l6">
-              <p>posted yesterday at 5am</p>
+              <p>{{post.date}}</p>
             </div>
             <div class="col l3">
-              <a href="#" class="activator"><i class="material-icons">chat_bubble_outline</i>1 comment</a>
+              <a ng-click="post.votes += 1" class="activator" href=""><i class="material-icons">chat_bubble_outline</i>1 comment</a>
             </div>
             <div class="col l3">
-              <a href="#" class="activator"><i class="material-icons">mode_edit</i>Add Comment</a>
+              <a ng-click="post.votes -= 1" class="activator" href=""><i class="material-icons">mode_edit</i>Add Comment</a>
             </div>
           </div>
         </div>
@@ -77,5 +83,4 @@ const templateString = `<div class="row">
       </div>
     </div>
   </div>
-</div>
-`
+</div>`
