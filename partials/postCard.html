@@ -2,61 +2,60 @@
   <div class="col l12">
     <div class="card horizontal hoverable">
       <div class="card-image">
-        <img src="{{post.imageURL}}">
+        <img ng-src="{{postCard.imageURL}}">
       </div>
       <div class="card-stacked">
         <div class="card-content">
           <div class="row">
             <div class="col l8">
-              <h5>{{post.title}}</h5>
-              <h6>by {{post.author}}</h6>
+              <h5>{{postCard.title}}</h5>
+              <h6>by {{postCard.author}}</h6>
             </div>
             <div class="col l3">
-              <a><i class="small material-icons">thumb_up</i></a>
-              <a href="#"><i class="small material-icons">thumb_down</i></a>
+              <a ng-click="postCard.voteUp()" href=""><i class="small material-icons">thumb_up</i></a>
+              <a ng-click="postCard.voteDown()" href=""><i class="small material-icons">thumb_down</i></a>
             </div>
             <div class="col l1">
-              <h5>{{post.votes}}</h5>
+              <h5 ng-class="{'color-green': postCard.votes > 0, 'color-red': postCard.votes < 0}">{{postCard.votes}}</h5>
             </div>
           </div>
-          <p>{{post.description}}</p>
+          <p>{{postCard.description}}</p>
         </div>
         <div class="card-action">
           <div class="row">
             <div class="col l6">
-              <p>{{post.date}}</p>
+              <p>{{postCard.date}}</p>
             </div>
             <div class="col l3">
-              <a ng-click="post.show = 'comments'" class="activator"><i class="material-icons">chat_bubble_outline</i>{{post.comments.length}} comment</a>
+              <a ng-click="" class="activator" href=""><i class="material-icons">chat_bubble_outline</i>{{postCard.comments.length}}comment</a>
             </div>
             <div class="col l3">
-              <a ng-click="post.show = 'addComments'" class="activator"><i class="material-icons">mode_edit</i>Add Comment</a>
+              <a ng-click="" class="activator" href=""><i class="material-icons">mode_edit</i>Add Comment</a>
             </div>
           </div>
         </div>
       </div>
       <div class="card-reveal">
-        <div class="row" ng-show="post.show === 'comments'">
+        <div class="row showComments">
           <span class="card-title grey-text text-darken-4">Comment<i class="material-icons right">close</i></span>
-          <div ng-repeat="comment in post.comments"></div>
-          <p>{{comment.author}}: {{comment.comment}}</p>
+          <p ng-repeat="comment in postCard.comments">{{comment.author}}: {{comment.comment}}</p>
         </div>
-        <div ng-show="post.show === 'addComments'">
+        <div class="addComments">
           <form>
             <div class="input-field row">
               <div class="col l5">
-                <input id="commentAuthor" type="text" class="validate">
+                <input ng-model="postCard.commentAuthor" id="commentAuthor" type="text" class="validate">
                 <label for="commentAuthor">Author</label>
               </div>
             </div>
             <div class="input-field row">
               <div class="col l7">
-                <textarea id="comment" class="materialize-textarea"></textarea>
-                <label for="comment">Comment</label>
+                <textarea ng-model="postCard.comment" id="textarea1" class="materialize-textarea"></textarea>
+                <label for="textarea1">Comment</label>
               </div>
             </div>
             <div class="row">
-              <a ng-click="post.addComment(commentAuthor, comment)" class="waves-effect waves-light btn">Add Comment</a>
+              <a ng-click="postCard.addComment(); postCard.clearCommentForm()"class="waves-effect waves-light btn" >Add Comment</a>
             </div>
           </form>
         </div>
