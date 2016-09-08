@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)https://docs.angularjs.org/examples/example-ng-pluralize/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+  
+  <title>Example - example-ng-pluralize</title>
+  
+
+  <script src="./angular.min(1).js"></script>
+  
+
+  
+</head>
+<body ng-app="pluralizeExample" class="ng-scope">
+  <script>
+  angular.module('pluralizeExample', [])
+    .controller('ExampleController', ['$scope', function($scope) {
+      $scope.person1 = 'Igor';
+      $scope.person2 = 'Misko';
+      $scope.personCount = 1;
+    }]);
+</script>
+<div ng-controller="ExampleController" class="ng-scope">
+  <label>Person 1:<input type="text" ng-model="person1" value="Igor" class="ng-pristine ng-untouched ng-valid ng-not-empty"></label><br>
+  <label>Person 2:<input type="text" ng-model="person2" value="Misko" class="ng-pristine ng-untouched ng-valid ng-not-empty"></label><br>
+  <label>Number of People:<input type="text" ng-model="personCount" value="1" class="ng-pristine ng-untouched ng-valid ng-not-empty"></label><br>
+
+  <!--- Example with simple pluralization rules for en locale --->
+  Without Offset:
+  <ng-pluralize count="personCount" when="{&#39;0&#39;: &#39;Nobody is viewing.&#39;,
+                       &#39;one&#39;: &#39;1 person is viewing.&#39;,
+                       &#39;other&#39;: &#39;{} people are viewing.&#39;}">1 person is viewing.</ng-pluralize><br>
+
+  <!--- Example with offset --->
+  With Offset(2):
+  <ng-pluralize count="personCount" offset="2" when="{&#39;0&#39;: &#39;Nobody is viewing.&#39;,
+                       &#39;1&#39;: &#39;Igor is viewing.&#39;,
+                       &#39;2&#39;: &#39;Igor and Misko are viewing.&#39;,
+                       &#39;one&#39;: &#39;Igor, Misko and one other person are viewing.&#39;,
+                       &#39;other&#39;: &#39;Igor, Misko and {} other people are viewing.&#39;}">Igor is viewing.</ng-pluralize>
+</div>
+
+</body></html>
