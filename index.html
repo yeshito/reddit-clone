@@ -31,9 +31,9 @@
 </head>
 <body ng-controller="RedditController">
   <ul id="dropdown1" class="dropdown-content">
-    <li><a href="#!">Votes</a></li>
-    <li><a href="#!">Date Posted</a></li>
-    <li><a href="#!">Title</a></li>
+    <li><a ng-click="reddit.sortProp = 'votes'; reddit.sortReverse = true" href="">Votes</a></li>
+    <li><a ng-click="reddit.sortProp = 'date'; reddit.sortReverse = true" href="">Date Posted</a></li>
+    <li><a ng-click="reddit.sortProp = 'title'; reddit.sortReverse = false" href="">Title</a></li>
   </ul>
   <nav>
     <div class="nav-wrapper">
@@ -41,9 +41,10 @@
       <ul id="nav-mobile" class="left hide-on-med-and-down">
         <li><a href="" ng-click="reddit.showPostForm=!reddit.showPostForm">Add a Post<i class="medium material-icons left">note_add</i></a></li>
         <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Sort By<i class="material-icons right">arrow_drop_down</i></a></li>
+        <li>{{reddit.sortProp}}</li>
       </ul>
       <form>
-        <div class="input-field left">
+        <div class="input-field right">
           <input id="search" type="search" required>
           <label for="search"><i class="material-icons">search</i></label>
           <i class="material-icons">close</i>
@@ -85,7 +86,7 @@
         </div>
       </form>
     </div>
-    <post-card post-card="post" ng-repeat="post in reddit.posts"></post-card>
+    <post-card post-card="post" ng-repeat="post in reddit.posts | orderBy:reddit.sortProp:reddit.sortReverse"></post-card>
     <!-- <div class="row">
       <div class="col l12">
         <div class="card horizontal hoverable">

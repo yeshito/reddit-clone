@@ -14,6 +14,8 @@ app.controller('RedditController', function ($scope) {
   $scope.reddit = {};
   $scope.reddit.showpostForm = false;
   $scope.reddit.posts = [];
+  $scope.reddit.sortProp = 'votes';
+  $scope.reddit.sortReverse = true;
 
   $scope.reddit.Post = function () {
     this.title = $scope.reddit.title;
@@ -29,7 +31,10 @@ app.controller('RedditController', function ($scope) {
       this.commentAuthor = '';
       this.comment = '';
     }
-
+    this.showComments = true;
+    this.toggleComments = function () {
+      this.showComments = !this.showComments;
+    }
     this.votes = 0;
     this.voteUp = function () {
       this.votes++;

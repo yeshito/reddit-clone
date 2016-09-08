@@ -27,20 +27,20 @@
               <p>{{postCard.date}}</p>
             </div>
             <div class="col l3">
-              <a ng-click="" class="activator" href=""><i class="material-icons">chat_bubble_outline</i><ng-pluralize count="postCard.comments.length" when="{'0': 'No Comments', '1': '1 Comment', 'other': '{} Comments'}"></ng-pluralize></a>
+              <a ng-click="postCard.showComments = true" href="" class="activator"><i class="material-icons">chat_bubble_outline</i><ng-pluralize count="postCard.comments.length" when="{'0': 'No Comments', '1': '1 Comment', 'other': '{} Comments'}"></ng-pluralize></a>
             </div>
             <div class="col l3">
-              <a ng-click="" class="activator" href=""><i class="material-icons">mode_edit</i>Add Comment</a>
+              <a ng-click="postCard.showComments = false" href="" class="activator"><i class="material-icons">mode_edit</i>Add Comment</a>
             </div>
           </div>
         </div>
       </div>
       <div class="card-reveal">
-        <div class="row showComments">
-          <span class="card-title grey-text text-darken-4">Comment<i class="material-icons right">close</i></span>
+        <div class="row" ng-show="postCard.showComments">
+          <span class="card-title grey-text text-darken-4">Comments<i class="material-icons right">close</i></span>
           <p ng-repeat="comment in postCard.comments">{{comment.author}}: {{comment.comment}}</p>
         </div>
-        <div class="addComments">
+        <div ng-hide="postCard.showComments">
           <form>
             <div class="input-field row">
               <div class="col l5">
@@ -55,7 +55,7 @@
               </div>
             </div>
             <div class="row">
-              <a ng-click="postCard.addComment(); postCard.clearCommentForm()"class="waves-effect waves-light btn" >Add Comment</a>
+              <a ng-click="postCard.addComment(); postCard.clearCommentForm(); postCard.showComments = true" class="waves-effect waves-light btn" >Add Comment</a>
             </div>
           </form>
         </div>
